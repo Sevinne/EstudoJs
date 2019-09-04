@@ -4,7 +4,7 @@ function funcao01() {
     var vendedor = Array();
     var opcao, venpcod = 0, Auxvendas = 0, auxvendedor, auxvendaspmes;
     var i = 0;
-    var cola="";
+    var cola = "";
 
 
     do {
@@ -52,7 +52,7 @@ function funcao01() {
 
             case 02:
 
-                
+
 
                 for (i = 0; i < vendedor.length; i++) {
 
@@ -66,9 +66,10 @@ function funcao01() {
                     informacao.codven = Number(prompt(cola + "\nColoque o codigo do vendedor"));
                     informacao.mes = Number(prompt("Coloque o mes"));
                     informacao.Vendas = Number(prompt("Coloque a vendas"));
+
                     Vendas[i] = informacao;
 
-                    if ((i != 0) && (Vendas[i].codven == Vendas[i - 1].codven) && Vendas[i].mes == Vendas[i - 1].mes) {
+                    if ((i > 0) && (Vendas[i].codven == Vendas[i - 1].codven) && (Vendas[i].mes == Vendas[i - 1].mes)) {
 
                         alert("Não pode ter um vendendor com duas vendas no mesmo mes");
                         i--;
@@ -91,7 +92,7 @@ function funcao01() {
 
                 var codver = Number(prompt("Coloque o codigo"));
                 var codmes = Number(prompt("Coloque o mes"));
-                for (i = 0; i <= (Vendas.length - 1); i++) {
+                for (i = 0; i < Vendas.length; i++) {
 
                     if ((codver == Vendas[i].codven) && (codmes == Vendas[i].mes)) {
 
@@ -128,7 +129,7 @@ function funcao01() {
 
                 Auxvendas = Vendas[0].Vendas;
 
-                for (i = 0; i <= (Vendas.length - 1); i++) {
+                for (i = 0; i < Vendas.length; i++) {
 
                     if ((codmes == Vendas[i].mes) && (Auxvendas <= Vendas[i].Vendas)) {
 
@@ -146,29 +147,33 @@ function funcao01() {
 
             case 06:
 
-                auxvendaspmes = Vendas[0].Vendas;
+                var messes = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                for (i = 0; i < Vendas.length; i++) {
 
-                for (i = 0; i <= (Vendas.length - 1); i++) {
-
-                    if (auxvendaspmes <= Vendas[i].Vendas) {
-
-                        auxvendaspmes = Vendas[i].Vendas;
-
-                        auxvendedor = Vendas[i].mes;
-
-                    }
+                    messes[vendas[i].mes - 1] = messes[Vendas[i].mes - 1] + Vendas[i].valor;
 
                 }
-                alert("O mes com mais vendas: " + auxvendedor);
+                var maior = 0;
+                var mesMaior = 0;
+
+
+                for (i = 0; i < messes.length; i++) {
+
+                    maior = messes[i];
+                    mesMaior = i+1;
+
+                }
+
+                break;
+
+            default:
+
+                alert("Opção invalida");
 
                 break;
 
         }
-        default:
 
-        alert("Opção invalida");
-
-        break;
 
 
 
