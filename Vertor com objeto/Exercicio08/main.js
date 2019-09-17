@@ -1,79 +1,96 @@
 function script() {
 
     var dados = Array();
+
     var ttnumeroacid = 0;
-    for(var i= 0;i<=5;i++){
+
+    cadastroEstado(dados, ttnumeroacid);
+
+    verificacaoMaiorMenor(dados);
+
+    resultado(dados, ttnumeroacid);
+}
+function cadastroEstado(dados, ttnumeroacid) {
+
+    for (var i = 0; i <= 2; i++) {
 
         var info = {};
 
         info.nome_est = prompt("Coloque o nome do estado");
-        info.numb_veic = Number(prompt("Numeros de carros que circulava em 2012 em "+info.nome_est));
+        info.numb_veic = Number(prompt("Numeros de carros que circulava em 2012 em " + info.nome_est));
         info.numb_acid = Number(prompt("Numero de acidentes em 2012"));
-
-        dados[i] = info ;
+        auxindice = (info.numb_acid / info.numb_veic) * 100;
+        info.indice = auxindice.toFixed() * 100;
+        dados[i] = info;
 
         ttnumeroacid += dados[i].numb_acid;
     }
 
+}
+function verificacaoMaiorMenor(dados) {
     var auxmaior, auxmenor;
-    
-    var auxnomemaior,auxnomemenor;
-    
-    var auxnome = dados[0].nome_est;
+    var auxnomemaior, auxnomemenor;
 
-    var resultados = Array();
+    auxmaior = dados[0].indice;
+    auxmenor = dados[0].indice;
 
-    var resulpercentual = "";
-    var resulmedia = "";
+    for (var i = 0; i < dados.length; i++) {
 
-    auxmaior = dados[0].numb_acid;
-    auxmenor = dados[0].numb_acid;
-    
+        if (auxmaior <= dados[i].indice) {
 
-    for(var i = 0; i < dados.length; i++){
+            auxmaior = dados[i].indice;
 
-        if (auxmaior <= dados[i].numb_acid){
-
-                auxmaior = dados[i].numb_acid;
-
-                auxnomemaior = dados[i].nome_est;
+            auxnomemaior = dados[i].nome_est;
 
         }
-        if (auxmenor >= dados[i].numb_acid){
+        if (auxmenor >= dados[i].indice) {
 
-            auxmenor = dados[i].numb_acid;
+            auxmenor = dados[i].indice;
 
             auxnomemenor = dados[i].nome_est;
         }
-
-        var info = {};
-
-        info.nome_est = dados[i].nome_est;
-        var calculo = (dados[i].numb_acid/ttnumeroacid)*100;
-        info.pencentual = calculo.toFixed(2) + "%"
-        var calculo = dados[i].numb_acid / dados[i].numb_veic
-        info.media = calculo.toFixed(2);
-
-        resultados[i] = info; 
-
     }
-
-    for(var i = 0; i < dados.length; i++){
-
-        resulpercentual += resultados[i].nome_est + ": " +resultados[i].pencentual+"\n";
-        resulmedia += resultados[i].nome_est+": "+resultados[i].media+"\n";
-
-    }
-
     alert("Reultados");
-    alert("Maior indice de acidente\n"+auxnomemaior+": "+auxmaior+
-        "\nMenor indice de acidente\n"+auxnomemenor +": "+auxmenor);
+    alert(`Maior indice de acidente\n ${auxnomemaior} : ${auxmaior} \nMenor indice de acidente\n ${auxnomemenor} : ${auxmenor}`);
+}
+function resultado(dados) {
+    var total = 0;
+    for (var i = 0; i < dados.length; i++) {
 
-        alert("Percentual de cada estado\n"+resulpercentual);
-        alert("Media de cada estado\n"+resulmedia);
+        total += dados[i].numb_veic;
 
+    }
 
+    var resulpercentual = "";
 
+    for (var i = 0; i < dados.length; i++) {
 
+        var pencentual = (dados[i].numb_veic / total) * 100;
+        var pencentualToFixed = pencentual.toFixed();
+
+        resulpercentual += `${dados[i].nome_est} : ${pencentualToFixed} %\n`;
+
+    }
+
+    alert(`Percentual de cada estado\n ${resulpercentual}`);
+
+    var totalAcidentes = 0;
+    resulMedia = 0;
+
+    for (var i = 0; i < dados.length; i++) {
+
+        totalAcidentes += dados[i].numb_acid;
+
+    }
+    for (var i = 0; i < dados.length; i++) {
+
+        var media = (dados[i].numb_acid / totalAcidentes) * 100;
+
+        var mediaToFixed = media.toFixed();
+
+        resulMedia += `${dados[i].nome_est} : ${mediaToFixed} %\n`;
+
+    }
+    alert(`Media de cada estado\n" + ${resulMedia}`);
 
 }
