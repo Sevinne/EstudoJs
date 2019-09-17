@@ -1,14 +1,14 @@
 function root() {
 
     var radius = parseFloat(prompt("Put the radius"));
-    heght = parseFloat(prompt("Put the heght "));
-    volumeBranch(radius,heght);
+
+        volumeBranch(radius);
 }
-function volumeBranch(radius,heght) {
+function volumeBranch(radius) {
 
-    var volume = Math.PI * (radius**2)*heght;
+    var volume = (4*Math.PI *Math.pow(radius,3))/3;
 
-    alert(`The volume is ${volume}`);
+    alert(`The volume is ${volume.toFixed(2)}`);
 
 
     

@@ -24,13 +24,13 @@ function VereficationBranch(stringSt, stringNd) {
 
         if (stringSt[i] == stringNd[i]) {
 
-            var AnyVer = 0;
-
-            Any += 1;
+            alert("0")
+            
+            location.reload();
 
         } else {
 
-            alert(`The caracters diffent is ${stringSt[i]} and ${stringNd[i]} `)
+            alert(`The caracters diffent is ${i} `)
 
             break;
 
@@ -38,15 +38,10 @@ function VereficationBranch(stringSt, stringNd) {
         }
 
     }
-    if (Any >= i) {
-
-        alert(AnyVer);
-
-        location.reload();
-    }
-
-
 }
+
+
+
 
 
 
